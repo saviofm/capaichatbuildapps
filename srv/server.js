@@ -2,7 +2,6 @@ const cds = require("@sap/cds");
 const cors = require("cors");
 //var bodyParser = require("body-parser");
 
-const { getChatRagResponseChat } = require('./chat-service-build');
 
 cds.on("bootstrap", (app) => {
 
