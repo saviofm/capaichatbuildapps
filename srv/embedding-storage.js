@@ -163,14 +163,15 @@ module.exports = function () {
       // Delete any previous records in the table
       const { DocumentChunk, Files } = this.entities;
       const deletestatus =  
-        await DELETE.from(DocumentChunk).where({ file_ID: 
-            SELECT('ID').from(Files).where(
-              {
-                createdBy: req.user.id
-              }
-            )                   
-          })
-        await UPDATE.entity(Files).where({createdBy: req.user.id}).set({embedded: false})   
+        await DELETE.from(DocumentChunk)//.where({ file_ID: 
+            //SELECT('ID').from(Files).where(
+            //  {
+            //    createdBy: req.user.id
+            //  }
+           // )                   
+          //})
+        await UPDATE.entity(Files)//.where({createdBy: req.user.id})
+        .set({embedded: false})   
        return "Sucess!"
     }
     catch (error) {
@@ -190,7 +191,7 @@ module.exports = function () {
   this.after('DELETE', ['Files'], async (results, req) => {
     const {DocumentChunk } = this.entities;
     // Delete existing embeddings 
-    const deletestatus = await DELETE.from(DocumentChunk).where({file_ID: req.data.ID });
+    await DELETE.from(DocumentChunk).where({file_ID: req.data.ID });
   });
 
 }
